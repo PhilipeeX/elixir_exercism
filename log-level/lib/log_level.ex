@@ -1,6 +1,4 @@
 defmodule LogLevel do
-  @log_codes [:trace, :debug, :info, :warning, :error, :fatal]
-
   def to_label(level, legacy?) do
     cond do
       level == 0 && !legacy? -> :trace
@@ -14,6 +12,12 @@ defmodule LogLevel do
   end
 
   def alert_recipient(level, legacy?) do
-    # Please implement the alert_recipient/2 function
+    label = to_label level, legacy?
+    cond do
+      label == :error || label == :fatal -> :ops
+      legacy? && label == :unknown -> :dev1
+      label == :unknown -> :dev2
+      true -> false
+    end
   end
 end
