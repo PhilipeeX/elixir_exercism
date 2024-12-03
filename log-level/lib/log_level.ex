@@ -2,14 +2,14 @@ defmodule LogLevel do
   @log_codes [:trace, :debug, :info, :warning, :error, :fatal]
 
   def to_label(level, legacy?) do
-    x =
-      cond do
-        level > 5
-        (legacy? && level == 0) || level == 5
-      end
-
-    if x == true do
-      :unknown
+    cond do
+      level == 0 && !legacy? -> :trace
+      level == 1 -> :debug
+      level == 2 -> :info
+      level == 3 -> :warning
+      level == 4 -> :error
+      level == 5 && !legacy? -> :fatal
+      true -> :unknown
     end
   end
 
