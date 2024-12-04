@@ -8,18 +8,24 @@ defmodule LanguageList do
   end
 
   def remove(list) do
-
+    list
+    |> tl
   end
 
   def first(list) do
-    # Please implement the first/1 function
+    list
+    |> hd
   end
 
   def count(list) do
-    # Please implement the count/1 function
+    list
+    |> length
   end
 
   def functional_list?(list) do
-    # Please implement the functional_list?/1 function
+    cond do
+      Enum.member?(list, "Elixir") -> true
+      true -> false
+    end
   end
 end
