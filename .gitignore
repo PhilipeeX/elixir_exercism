@@ -2,4 +2,5 @@
 *.iml
 *.mix
 *_build/
+.exercism
 
